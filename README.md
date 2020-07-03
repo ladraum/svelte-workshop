@@ -2,9 +2,15 @@
 
 ![Svelte icon](https://svelte.dev/svelte-logo-horizontal.svg)
 
-This project is a self contained workshop to get started with Svelte. Get from zero to hero following the steps in this repository.
+This project is a self contained workshop to get started with Svelte. 
+Get from zero to having a grasp of what Svelte offers by following the steps in this repository.
 
 ## What you will build?
+
+![What to expect](https://github.com/ladraum/svelte-workshop/blob/main/what_to_expect.gif?raw=true)
+
+Beatiful transitions, captioning effects, all making sure the user feels in control of the application.
+Too much trouble to build? Just go through this workshop to see for yourself.
 
 ## How to use this repository
 
