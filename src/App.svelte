@@ -1,30 +1,31 @@
 <script>
-	export let name;
+	let uid = 1;
+
+	let todos = [
+		{ id: uid++, done: false, description: 'write a Svelte workshop' },
+		{ id: uid++, done: false, description: 'start writing blog post' },
+		{ id: uid++, done: false, description: 'fix some bugs' },
+		{ id: uid++, done: false, description: 'add a feature' },
+		{ id: uid++, done: false, description: 'add another feature' },
+		{ id: uid++, done: false, description: 'add even another feature' },
+	];
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<div>
+	<h2>Todo</h2>
+	{#each todos as todo (todo.id)}
+		<label>
+			<input type="checkbox">
+			{todo.description}
+		</label>
+	{/each}
+</div>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	h2 {
+		font-size: 2em;
+		font-weight: 200;
+		user-select: none;
+		margin: 0 0 0.5em 0;
 	}
 </style>
