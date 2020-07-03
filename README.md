@@ -41,3 +41,5 @@ npm run dev
 
 Having a Svelte ready project to start coding with. It should look like this:
 ![Image](https://i.ibb.co/fqkg9wc/svelte-preview.png)
+
+Now check out the `step-1` branch for the next step.
