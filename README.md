@@ -57,6 +57,22 @@ And also replace the style portion with:
 	}
 ```
 
+And for the display portion, use: 
+
+```html
+<div>
+	<h2>Todo</h2>
+	{#each todos as todo (todo.id)}
+		<label>
+			<input type="checkbox">
+			{todo.description}
+		</label>
+	{/each}
+</div>
+```
+
+Note the `{#each todos as todo (todo.id)}`, that can iterate over items and display the content for each one. It uses the `(todo.id)` to identify each of the items to display.
+
 ### Expected outcome
 
 The list of items should look like this:
