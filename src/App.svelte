@@ -31,12 +31,12 @@
 	let uid = 1;
 
 	let todos = [
-		{ id: uid++, done: false, description: 'write some docs' },
+		{ id: uid++, done: false, description: 'write a Svelte workshop' },
 		{ id: uid++, done: false, description: 'start writing blog post' },
-		{ id: uid++, done: true,  description: 'buy some milk' },
-		{ id: uid++, done: false, description: 'mow the lawn' },
-		{ id: uid++, done: false, description: 'feed the turtle' },
 		{ id: uid++, done: false, description: 'fix some bugs' },
+		{ id: uid++, done: false, description: 'add a feature' },
+		{ id: uid++, done: false, description: 'add another feature' },
+		{ id: uid++, done: false, description: 'add even another feature' },
 	];
 
 	function add(input) {
