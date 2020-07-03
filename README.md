@@ -35,26 +35,26 @@ Let's also style the header of the todos to be a bit better than the standard `<
 Replace the script portion of the `App.svelte` file with:
 
 ```javascript
-    let uid = 1;
+let uid = 1;
 
-	let todos = [
-		{ id: uid++, done: false, description: 'write a Svelte workshop' },
-		{ id: uid++, done: false, description: 'start writing blog post' },
-		{ id: uid++, done: false, description: 'fix some bugs' },
-		{ id: uid++, done: false, description: 'add a feature' },
-		{ id: uid++, done: false, description: 'add another feature' },
-		{ id: uid++, done: false, description: 'add even another feature' },
-	];
+let todos = [
+    { id: uid++, done: false, description: 'write a Svelte workshop' },
+    { id: uid++, done: false, description: 'start writing blog post' },
+    { id: uid++, done: false, description: 'fix some bugs' },
+    { id: uid++, done: false, description: 'add a feature' },
+    { id: uid++, done: false, description: 'add another feature' },
+    { id: uid++, done: false, description: 'add even another feature' },
+];
 ```
 
 And also replace the style portion with:
 ```css
-	h2 {
-		font-size: 2em;
-		font-weight: 200;
-		user-select: none;
-		margin: 0 0 0.5em 0;
-	}
+h2 {
+    font-size: 2em;
+    font-weight: 200;
+    user-select: none;
+    margin: 0 0 0.5em 0;
+}
 ```
 
 And for the display portion, use: 
