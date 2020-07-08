@@ -10,16 +10,36 @@
 		{ id: uid++, done: false, description: 'add even another feature' },
 	];
 
+	function add(input) {
+		const todo = {
+			id: uid++,
+			done: false,
+			description: input.value
+		};
+		todos = [todo, ...todos];
+		input.value = '';
+	}
+
 	function remove(todo) {
 		todos = todos.filter(t => t !== todo);
 	}
+
+	function mark(todo, done) {
+		todo.done = done;
+		remove(todo);
+		todos = todos.concat(todo);
+	}
 </script>
 <div class='board'>
+	<input
+		placeholder="what needs to be done?"
+		on:keydown={e => e.key === 'Enter' && add(e.target)}
+	>
 	<div>
 		<h2>Todo</h2>
 		{#each todos.filter(t => !t.done) as todo (todo.id)}
 			<label>
-				<input type="checkbox">
+				<input type=checkbox on:change={() => mark(todo, true)}>
 				{todo.description}
 				<button on:click="{() => remove(todo)}">remove</button>
 			</label>
@@ -28,8 +48,8 @@
 	<div>
 		<h2>Done</h2>
 		{#each todos.filter(t => t.done) as todo (todo.id)}
-			<label>
-				<input type="checkbox">
+			<label class="done">
+				<input type=checkbox checked on:change={() => mark(todo, false)}>
 				{todo.description}
 				<button on:click="{() => remove(todo)}">remove</button>
 			</label>
@@ -44,6 +64,14 @@
 		grid-gap: 1em;
 		max-width: 36em;
 		margin: 0 auto;
+	}
+	.board > input {
+		font-size: 1.4em;
+		grid-column: 1/3;
+	}
+	.done {
+		border: 1px solid hsl(240, 8%, 90%);
+		background-color:hsl(240, 8%, 98%);
 	}
 	h2 {
 		font-size: 2em;
