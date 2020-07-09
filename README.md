@@ -2,67 +2,82 @@
 
 ![Svelte icon](https://svelte.dev/svelte-logo-horizontal.svg)
 
-But I can't get the items to done? This doesn't work! I can check them, but they don't get to the second column.
-
-Don't worry. That step was to understand how to listen to events and how to bind those. Now we'll interact with the items on the list, mark them as done, and see them moving around (and understand how to bind inputs).
+So now we can get items moving, but it's too abrupt. We want to give our users a great user experience so they want to get things done.
 
 ### Problem to solve
 
-Allow the users to add items, and move them to done.
+Ease the transitions for:
+- Moving items between Todo and done
+- When adding new items
+- When removing an item
 
 ### Instructions to achieve the solution
 
-To get the items marked as done, we'll need to update the `todo` list every time the user interacts with the item. Do to that, let's trigger the change for the todo item:
-
-```html
-<input type=checkbox on:change={() => mark(todo, true)}>
-```
-
-And add the function to make the update. Lets reuse the `remove` function, so the changed item gets moved to the end of the list:
+The fastest way to ease some of the transitions is to add the `animate` property with the flip option, which is based on [First, Last, Invert, Play](https://aerotwist.com/blog/flip-your-animations/). To use it, first we'll need to import it:
 
 ```javascript
-function mark(todo, done) {
-    todo.done = done;
-    remove(todo);
-    todos = todos.concat(todo);
-}
+import { flip } from 'svelte/animate';
 ```
 
-You'll need to add a similar change to the done items, but marking them as not done, and displaying the checkbox as checked.
-
-To allow the user to add a new item, let's add an input that will add the item :
+Then we can add it to our labels:"
 
 ```html
-<input
-    placeholder="what needs to be done?"
-    on:keydown={e => e.key === 'Enter' && add(e.target)}
+<label animate:flip>
+    ...
+</label>
+```
+
+This will make the items remaining items on the list move up, instead of just showing in the new position. But there's more we can do. We want to link the items leaving one list to the ones entering the other, and to do so we'll use `crossfade`. That will allow us to send and receive items across lists. And if we don't have an item (if the user is removing or adding items), we'll need a fallback method to handle that.
+
+So, we'll start by importing:
+
+```javascript
+import { crossfade } from 'svelte/transition';
+import { quintOut } from 'svelte/easing'; // this is for the fallback method
+```
+
+And after that, we can use them to create the `send` and `receive` methods for our transitions:
+
+```javascript
+const [send, receive] = crossfade({
+    duration: d => Math.sqrt(d * 200),
+
+    fallback(node, params) {
+        const style = getComputedStyle(node);
+        const transform = style.transform === 'none' ? '' : style.transform;
+
+        return {
+            duration: 600,
+            easing: quintOut,
+            css: t => `
+                transform: ${transform} scale(${t});
+                opacity: ${t}
+            `
+        };
+    }
+});
+```
+With those created, we can update our labels to use them as:
+
+```html
+<label
+    in:receive="{{key: todo.id}}"
+    out:send="{{key: todo.id}}"
+    animate:flip
 >
 ```
 
-This way, the function will only be called when the user presses the `Enter` key. To update the state, we'll need to add the `add` function. We want the item to be added in the start of the list, so we can acomplish this by:
+This way, we can identify the items going in and out, so the animations can flow.
 
-```javascript
-function add(input) {
-    const todo = {
-        id: uid++,
-        done: false,
-        description: input.value
-    };
-    todos = [todo, ...todos];
-    input.value = '';
-}
-```
-
-And let's add some style to the input and for the done items:
+And, to finalize, we can only show the remove button when the user hovers the item. Since we already have the animation set up, we can do that just by styling the button, not displaying it by default:
 
 ```css
-.board > input {
-    font-size: 1.4em;
-    grid-column: 1/3;
+button {
+    ...
+    opacity: 0;
 }
-.done {
-    border: 1px solid hsl(240, 8%, 90%);
-    background-color:hsl(240, 8%, 98%);
+label:hover button {
+    opacity: 1;
 }
 ```
 
