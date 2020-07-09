@@ -1,4 +1,4 @@
-# Svelte workshop - Step 1
+# Svelte workshop - Step 2
 
 ![Svelte icon](https://svelte.dev/svelte-logo-horizontal.svg)
 
