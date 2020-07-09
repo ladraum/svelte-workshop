@@ -19,7 +19,7 @@ The fastest way to ease some of the transitions is to add the `animate` property
 import { flip } from 'svelte/animate';
 ```
 
-Then we can add it to our labels:"
+Then we can add it to our labels:
 
 ```html
 <label animate:flip>
