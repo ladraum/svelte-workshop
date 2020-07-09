@@ -1,4 +1,4 @@
-# Svelte workshop - Step 1
+# Svelte workshop - Step 4
 
 ![Svelte icon](https://svelte.dev/svelte-logo-horizontal.svg)
 
@@ -84,6 +84,6 @@ label:hover button {
 ### Expected outcome
 
 The list of items should look like this:
-![Image](https://github.com/ladraum/svelte-workshop/raw/step-3/what_to_expect.gif)
+![Image](https://github.com/ladraum/svelte-workshop/raw/step-4/what_to_expect.gif)
 
-Now check out the `step-4` branch for the next step.
+Now check out the `step-5` branch for the next step.
