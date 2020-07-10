@@ -55,3 +55,4 @@ For an even quicker overview, check the differences for each step:
 - [Listen to DOM events](https://github.com/ladraum/svelte-workshop/compare/step-2...step-3?expand=1#diff-534c52cd83756b9c3b6c7b2243edda00)
 - [Update component State](https://github.com/ladraum/svelte-workshop/compare/step-3...step-4?expand=1#diff-534c52cd83756b9c3b6c7b2243edda00)
 - [Add animation](https://github.com/ladraum/svelte-workshop/compare/step-4...step-5#diff-534c52cd83756b9c3b6c7b2243edda00)
+- [Load data from server and handle loading state](https://github.com/ladraum/svelte-workshop/compare/step-5...step-6#diff-534c52cd83756b9c3b6c7b2243edda00)
