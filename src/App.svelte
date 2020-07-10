@@ -59,11 +59,42 @@
 		remove(todo);
 		todos = todos.concat(todo);
 	}
+
+	let promise = getRandomNumber();
+
+	async function getRandomNumber() {
+		const res = await fetch(`https://svelte.dev/tutorial/random-number`);
+		const text = await res.text();
+
+		if (res.ok) {
+			return text;
+		} else {
+			throw new Error(text);
+		}
+	}
+
+	function handleRandomNumberClick() {
+		promise = getRandomNumber();
+	}
 </script>
 
 <div class='board'>
 	<div class="logo-container">
 		<img {...LOGO} />
+	</div>
+	<div>
+		<button class="generator" on:click={handleRandomNumberClick}>
+			Generate random number
+		</button>
+	</div>
+	<div>
+		{#await promise}
+			...waiting
+		{:then number}
+			The number is {number}
+		{:catch error}
+			<span style="color: red">{error.message}</span>
+		{/await}
 	</div>
 	<input
 		placeholder="what needs to be done?"
@@ -80,7 +111,7 @@
 			>
 				<input type=checkbox on:change={() => mark(todo, true)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
+				<button class="remove" on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>
@@ -96,7 +127,7 @@
 			>
 				<input type=checkbox checked on:change={() => mark(todo, false)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
+				<button class="remove" on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>
@@ -155,7 +186,7 @@
 		background-color:hsl(240, 8%, 98%);
 	}
 
-	button {
+	.remove {
 		position: absolute;
 		top: 0;
 		right: 0.2em;
@@ -170,7 +201,8 @@
 		cursor: pointer;
 	}
 
-	label:hover button {
+	label:hover .remove {
 		opacity: 1;
 	}
+
 </style>
