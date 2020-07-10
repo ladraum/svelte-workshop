@@ -47,8 +47,6 @@ That way you don't have to pass every single property separetly.
 ### Expected outcome
 
 The list of items should look like this:
-![Image](https://github.com/ladraum/svelte-workshop/raw/main/what_to_expect.gif)
+![Image](https://github.com/ladraum/svelte-workshop/raw/step-5/what_to_expect.gif)
 
-If you miss any step, you can check out the `final` branch for the end result.
-
-Thank you for following this workshop!
+Now check out the `step-6` branch for the next step.
