@@ -1,48 +1,63 @@
-# Svelte workshop - Step 5
+# Svelte workshop - Step 6
 
 ![Svelte icon](https://svelte.dev/svelte-logo-horizontal.svg)
 
-Since most of the User Experience is done, let's talk about something to improve the developers experience. Instead of passing every single property to an HTML element, you can use the spread option to do it.
+Since we've handled the todo list, let's add something else that is common in applications: loading data from the server. Svelte can handle promisses directly in the HTML, so you don't have to create and handle a separated state just for that.
 
 ### Problem to solve
 
-Use an JS object to populate the properties of an `<img>` tag.
+Load a randon number from a server, display a waiting message for the user while loading, and display a message in case of an error.
 
 ### Instructions to achieve the solution
 
-We first need to create the JS obejct, like:
+Add the code to retrieve the random number in the `<script>` portion:
 
 ```javascript
-const LOGO = {
-    src: 'http://womenintech-awards.com/wordpress/wp-content/uploads/2019/10/rangle-wit-awards.png',
-    alt: 'Rangle.io',
-    width: 200,
-    height: 140
-};
-```
-
-Then we can simply spread it on the tag:
-
-
-```html
-<div class="logo-container">
-    <img {...LOGO} />
-</div>
-```
-
-And add some styling to it:
-
-```css
-.logo-container {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 1;
-    text-align: center;
+let promise = getRandomNumber();
+async function getRandomNumber() {
+    const res = await fetch(`https://svelte.dev/tutorial/random-number`);
+    const text = await res.text();
+    if (res.ok) {
+        return text;
+    } else {
+        throw new Error(text);
+    }
 }
 ```
 
-That way you don't have to pass every single property separetly.
+Let's also add a function to trigger it through a button:
+
+```javascript
+function handleRandomNumberClick() {
+    promise = getRandomNumber();
+}
+```
+
+Then we the button:
+
+```html
+<div>
+    <button class="generator" on:click={handleRandomNumberClick}>
+        Generate random number
+    </button>
+</div>
+```
+
+And finally display the loaded value:
+
+```html
+<div>
+    {#await promise}
+        ...waiting
+    {:then number}
+        The number is {number}
+    {:catch error}
+        <span style="color: red">{error.message}</span>
+    {/await}
+</div>
+```
+
+Using `{#await` we can attach the code directly to the markup. We can even use `{#if`, `{:else}` and `{/if}` for conditionals in the markup too.
 
 ### Expected outcome
 
