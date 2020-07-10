@@ -72,11 +72,11 @@ This way, we can identify the items going in and out, so the animations can flow
 And, to finalize, we can only show the remove button when the user hovers the item. Since we already have the animation set up, we can do that just by styling the button, not displaying it by default:
 
 ```css
-button {
+.remove {
     ...
     opacity: 0;
 }
-label:hover button {
+label:hover .remove {
     opacity: 1;
 }
 ```

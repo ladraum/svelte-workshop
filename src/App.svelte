@@ -41,7 +41,7 @@
 			<label>
 				<input type=checkbox on:change={() => mark(todo, true)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
+				<button class="remove" on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>
@@ -51,7 +51,7 @@
 			<label class="done">
 				<input type=checkbox checked on:change={() => mark(todo, false)}>
 				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
+				<button class="remove" on:click="{() => remove(todo)}">remove</button>
 			</label>
 		{/each}
 	</div>
@@ -96,7 +96,7 @@
 		top: 0.6em;
 		margin: 0;
 	}
-	button {
+	.remove {
 		position: absolute;
 		top: 0;
 		right: 0.2em;
