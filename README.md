@@ -52,7 +52,7 @@ First, add a button after the todo description:
 <label>
     <input type="checkbox">
     {todo.description}
-    <button on:click="{() => remove(todo)}">remove</button>
+    <button class="remove" on:click="{() => remove(todo)}">remove</button>
 </label>
 ```
 
@@ -87,7 +87,7 @@ input[type="checkbox"] {
     top: 0.6em;
     margin: 0;
 }
-button {
+.remove      {
     position: absolute;
     top: 0;
     right: 0.2em;
